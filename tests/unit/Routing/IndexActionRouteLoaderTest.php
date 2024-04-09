@@ -8,8 +8,8 @@ use Jmf\CrudEngine\Configuration\RedirectionConfiguration;
 use Jmf\CrudEngine\Configuration\RouteConfiguration;
 use Jmf\CrudEngine\Configuration\ViewConfiguration;
 use Jmf\CrudEngine\Routing\IndexActionRouteLoader;
+use Override;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 use Symfony\Component\Routing\RouteCollection;
 
 class IndexActionRouteLoaderTest extends TestCase
@@ -18,6 +18,7 @@ class IndexActionRouteLoaderTest extends TestCase
 
     private RouteCollection $routeCollection;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->loader = new IndexActionRouteLoader();
