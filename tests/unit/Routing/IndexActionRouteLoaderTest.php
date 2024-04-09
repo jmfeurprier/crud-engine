@@ -9,13 +9,14 @@ use Jmf\CrudEngine\Configuration\RouteConfiguration;
 use Jmf\CrudEngine\Configuration\ViewConfiguration;
 use Jmf\CrudEngine\Routing\IndexActionRouteLoader;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use Symfony\Component\Routing\RouteCollection;
 
 class IndexActionRouteLoaderTest extends TestCase
 {
-    private readonly IndexActionRouteLoader $loader;
+    private IndexActionRouteLoader $loader;
 
-    private readonly RouteCollection $routeCollection;
+    private RouteCollection $routeCollection;
 
     protected function setUp(): void
     {
@@ -27,7 +28,7 @@ class IndexActionRouteLoaderTest extends TestCase
     public function testLoad(): void
     {
         $actionConfiguration = $this->givenActionConfiguration(
-            entityClass: 'Foo\Bar',
+            entityClass: \stdClass::class,
             action:      'index',
             entityName:  'foo',
             routePath:   'foo/bar',
@@ -39,9 +40,13 @@ class IndexActionRouteLoaderTest extends TestCase
 
         $route = $this->routeCollection->get('foo.index');
 
+        $this->assertNotNull($route);
         $this->assertSame('/foo/bar', $route->getPath());
     }
 
+    /**
+     * @param class-string $entityClass
+     */
     private function givenActionConfiguration(
         string $entityClass,
         string $action,
@@ -72,8 +77,8 @@ class IndexActionRouteLoaderTest extends TestCase
             entityClass:              $entityClass,
             action:                   $action,
             entityName:               $entityName,
-            formTypeClass:            '',
-            helperClass:              '',
+            formTypeClass:            null,
+            helperClass:              null,
             redirectionConfiguration: $redirectionConfiguration,
             routeConfiguration:       $routeConfiguration,
             viewConfiguration:        $viewConfiguration,
