@@ -7,7 +7,6 @@ use Doctrine\Instantiator\InstantiatorInterface;
 use Jmf\CrudEngine\Configuration\ActionConfigurationRepository;
 use Jmf\CrudEngine\Configuration\ActionConfigurationRepositoryFactory;
 use Jmf\CrudEngine\Configuration\ActionConfigurationRepositoryFactoryInterface;
-use Jmf\CrudEngine\Configuration\ActionConfigurationRepositoryInterface;
 use Jmf\CrudEngine\Configuration\CacheableActionConfigurationRepositoryFactory;
 use Jmf\CrudEngine\Controller\Helpers\ActionHelperResolver;
 use Jmf\CrudEngine\Routing\RouteLoader;
@@ -114,9 +113,7 @@ class JmfCrudEngineBundle extends AbstractBundle
         ;
 
         $container->services()
-            ->set(ActionConfigurationRepositoryInterface::class)
-            ->class(ActionConfigurationRepository::class)
-            ->autowire()
+            ->set(ActionConfigurationRepository::class)
             ->factory(
                 [
                     new Reference(ActionConfigurationRepositoryFactoryInterface::class),
