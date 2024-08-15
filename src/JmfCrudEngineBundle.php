@@ -4,6 +4,7 @@ namespace Jmf\CrudEngine;
 
 use Doctrine\Instantiator\Instantiator;
 use Doctrine\Instantiator\InstantiatorInterface;
+use Jmf\CrudEngine\Configuration\ActionConfigurationRepository;
 use Jmf\CrudEngine\Configuration\ActionConfigurationRepositoryFactory;
 use Jmf\CrudEngine\Configuration\ActionConfigurationRepositoryFactoryInterface;
 use Jmf\CrudEngine\Configuration\ActionConfigurationRepositoryInterface;
@@ -114,6 +115,7 @@ class JmfCrudEngineBundle extends AbstractBundle
 
         $container->services()
             ->set(ActionConfigurationRepositoryInterface::class)
+            ->class(ActionConfigurationRepository::class)
             ->autowire()
             ->factory(
                 [
